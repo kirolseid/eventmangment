@@ -1,824 +1,776 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EventMasters - Premier Event Management</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #000;
-            color: #fff;
-        }
-        header {
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 1rem;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-        }
-        nav ul li {
-            margin: 0 1rem;
-        }
-        nav ul li a {
-            color: #cdb045;
-            text-decoration: none;
-        }
-        section {
-            /* padding: 4rem 2rem; */
-            /* max-width: 1200px; */
-            margin: 0 auto;
-        }
-        h1 {
-            color: #cdb045;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-        p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-        .hero {
-            position: relative;
-            height: 100vh;
-            overflow: hidden;
-        }
-        .hero video {
-            height: 100%;
-            object-fit: cover;
-            width: 100%;
-        }
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            padding-top: 40vh;
-        }
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-        }
-        .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        .cta-button {
-            display: inline-block;
-            background-color: linear-gradient(180deg, #fedf4e, #65421b);
-            color: #000;
-            padding: 0.75rem 1.5rem;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 1.1rem;
-            font-weight: bold;
-        }
-        .about-us {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-        .about-us-content {
-            flex: 1;
-        }
-        .about-us-image {
-            flex: 1;
-        }
-        .event-intro {
-            background: linear-gradient(
-      rgba(000, 000, 000, 0.5),
-      rgba(000, 000, 000, 0.5)
-    ),
-    url("events/Event Intro/Event Intro.webp");
-            /* background-image: url('events/Event Intro/Event Intro.webp'); */
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            /* min-height: 100vh; */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 6rem 2rem;
-        }
-
-
-        /* .event-intro  {
-            background-image: url('events/Event Intro/Event Intro.webp');
-
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            padding: 6rem 2rem;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .event-intro::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.7);
-            
-        } */
-
-        .event-intro-content {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 2rem;
-            border-radius: 8px;
-            text-align: center;
-            max-width: 800px;
-        }
-        .event-intro h2 {
-            color: #cdb045;
-            font-size: 2.2rem;
-            margin-bottom: 1rem;
-        }
-
-        #event-types {
-            background-color: #111;
-            padding: 4rem 2rem;
-        }
-
-        #event-types h2 {
-            color: #cdb045;
-            font-size: 2.2rem;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .event-types-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .event-type {
-            background-color: #222;
-            /* padding: 1.5rem; */
-            border-radius: 8px;
-            text-align: center;
-            max-width: 350px;
-            margin: auto;
-        }
-
-        .event-type img {
-            width: 100%;
-            height: 300px;
-            /* object-fit: cover; */
-            border-radius: 8px;
-        }
-          
-        .event-type h3 {
-            color: #cdb045;
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .event-type p {
-            font-size: 0.9rem;
-            color: #ddd;
-        }
-
-        .team-building-intro {
-            background-image: url('https://via.placeholder.com/1920x1080.png?text=Team+Building');
-            background-size: cover;
-        }
-
-        .about-section {
-            background-color: #000;
-            color: #fff;
-            padding: 4rem 2rem;
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about-section::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 40%;
-           
-            opacity: 0.2;
-            z-index: 0;
-        }
-
-        .about-content {
-            flex: 1;
-            position: relative;
-            z-index: 1;
-        }
-
-        .about-content h2 {
-            color: #cdb045;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-        }
-
-        .about-content h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-        }
-
-        .about-content p {
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        .about-content h3 {
-            color: #cdb045;
-            margin-top: 1.5rem;
-            margin-bottom: 0.5rem;
-            font-size: 1rem;
-        }
-
-        .about-content ul {
-            list-style-type: none;
-            padding-left: 0;
-            margin-bottom: 1rem;
-        }
-
-        .about-content ul li {
-            margin-bottom: 0.5rem;
-            position: relative;
-            padding-left: 1.5rem;
-            font-size: 0.9rem;
-        }
-
-        .about-content ul li::before {
-            content: '•';
-            color: #cdb045;
-            position: absolute;
-            left: 0;
-        }
-
-        .about-images {
-            flex: 1;
-            display: grid;
-            grid-template-columns: 2fr 3fr;
-            grid-template-rows: auto auto;
-            gap: 1rem;
-            position: relative;
-            z-index: 1;
-            padding: 2rem;
-        }
-
-        .about-images::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(128, 0, 128, 0.1);
-            border-radius: 12px;
-            z-index: -1;
-        }
-
-        .about-images img {
-            border-radius: 8px;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: relative;
-            z-index: 2;
-        }
-
-        .about-images .image-1 {
-            grid-column: 1 / 2;
-            grid-row: 1 / 2;
-            align-self: end;
-        }
-
-        .about-images .image-2 {
-            grid-column: 1 / 2;
-            grid-row: 2 / 3;
-            align-self: start;
-        }
-
-        .about-images .image-3 {
-            grid-column: 2 / 3;
-            grid-row: 1 / 3;
-            align-self: start;
-            margin-top: -2rem;
-        }
-
-        #team-building-types {
-            background-color: #000;
-            color: #fff;
-            padding: 4rem 2rem;
-        }
-
-        #team-building-types h2 {
-            color: #cdb045;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .team-building-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .team-building-type {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-            max-width: 350px;
-            margin: auto;
-        }
-
-        .team-building-type:hover {
-            transform: translateY(-5px);
-        }
-
-        .team-building-type img {
-            width: 100%;
-            height: 300px;
-            /* object-fit: cover; */
-        }
-
-        .team-building-type h3 {
-            color: #cdb045;
-            font-size: 1.2rem;
-            margin: 1rem;
-        }
-
-        .team-building-type p {
-            font-size: 0.9rem;
-            margin: 0 1rem 1rem;
-            line-height: 1.6;
-        }
-
-        .catering-intro {
-            display: flex;
-            align-items: center;
-            padding: 4rem 2rem;
-            background-color: #111;
-        }
-
-        .catering-content {
-            flex: 1;
-            padding-right: 2rem;
-        }
-
-        .catering-content h2 {
-            color: #cdb045;
-            font-size: 2.2rem;
-            margin-bottom: 1rem;
-        }
-
-        .catering-content p {
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-
-        .catering-image {
-            flex: 1;
-        }
-
-        .catering-image img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-
-        @media (max-width: 768px) {
-            .catering-intro {
-                flex-direction: column-reverse;
-            }
-
-            .catering-content {
-                padding-right: 0;
-                padding-top: 2rem;
-            }
-        }
-
-        #catering-types {
-            background-color: #000;
-            color: #fff;
-            padding: 4rem 2rem;
-        }
-
-        #catering-types h2 {
-            color: #cdb045;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .catering-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .catering-type {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-            max-width: 350px;
-            margin: auto;
-        }
-
-        .catering-type:hover {
-            transform: translateY(-5px);
-        }
-
-        .catering-type img {
-            width: 100%;
-            height: 300px;
-            /* object-fit: cover; */
-        }
-
-        .catering-type h3 {
-            color: #cdb045;
-            font-size: 1.2rem;
-            margin: 1rem;
-        }
-
-        .catering-type p {
-            font-size: 0.9rem;
-            margin: 0 1rem 1rem;
-            line-height: 1.6;
-        }
-
-        @media (max-width: 768px) {
-            .catering-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .why-us {
-            background-image: url('events/backgrounds/why us.webp');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            padding: 6rem 2rem;
-            position: relative;
-        }
-
-        .why-us::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.7);
-        }
-
-        .why-us-content {
-            position: relative;
-            z-index: 1;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .why-us h2 {
-            color: #cdb045;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            text-align: center;
-        }
-
-        .reasons-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-        }
-
-        .reason {
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .reason:hover {
-            transform: translateY(-5px);
-        }
-
-        .reason i {
-            font-size: 3rem;
-            color: #cdb045;
-            margin-bottom: 1rem;
-        }
-
-        .reason h3 {
-            color: #cdb045;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .reason p {
-            font-size: 1rem;
-            line-height: 1.6;
-            color: #fff;
-        }
-
-        @media (max-width: 768px) {
-            .reasons-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-    #event-services {
-        background-color: #111;
-        padding: 4rem 2rem;
-    }
-
-    #event-services h2 {
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #000;
+        color: #fff;
+      }
+      header {
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 1rem;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+      }
+      nav ul {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+      }
+      nav ul li {
+        margin: 0 1rem;
+      }
+      nav ul li a {
+        color: #cdb045;
+        text-decoration: none;
+      }
+      section {
+        /* padding: 4rem 2rem; */
+        /* max-width: 1200px; */
+        margin: 0 auto;
+      }
+      h1 {
         color: #cdb045;
         font-size: 2.5rem;
-        margin-bottom: 3rem;
-        text-align: center;
-    }
-
-    .services-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: 2rem;
-    }
-
-    .service {
-        background-color: #222;
-        border-radius: 8px;
-        padding: 2rem;
-        text-align: center;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .service:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 10px 20px rgba(255, 215, 0, 0.2);
-    }
-
-    .service i {
-        font-size: 3rem;
-        color: #cdb045;
         margin-bottom: 1rem;
-        transition: transform 0.3s ease;
-    }
+      }
+      p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+      .hero {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+      }
+      .hero video {
+        height: 100%;
+        object-fit: cover;
+        width: 100%;
+      }
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        padding-top: 40vh;
+      }
 
-    .service:hover i {
-        transform: scale(1.2);
-    }
+      @media (max-width: 1100px) {
+        .hero {
+          position: relative;
+          height: fit-content;
+          overflow: hidden;
+        }
 
-    .service h3 {
+        .hero video {
+          object-fit: contain !important;
+          padding-top: 10vh;
+        }
+      }
+
+      
+      .about-section {
+        background-color: #000;
+        color: #fff;
+        padding: 4rem 2rem;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .about-section::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 40%;
+        opacity: 0.2;
+        z-index: 0;
+      }
+
+      .about-content {
+        flex: 1;
+        position: relative;
+        z-index: 1;
+      }
+
+      .about-content h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+      }
+
+      .about-content p {
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+
+      .about-images {
+        flex: 1;
+        display: grid;
+        grid-template-columns: 2fr 3fr;
+        grid-template-rows: auto auto;
+        gap: 1rem;
+        position: relative;
+        z-index: 1;
+        padding: 2rem;
+      }
+
+      .about-images::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(128, 0, 128, 0.1);
+        border-radius: 12px;
+        z-index: -1;
+      }
+
+      .about-images img {
+        border-radius: 8px;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: relative;
+        z-index: 2;
+      }
+
+      .about-images .image-1 {
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+        align-self: end;
+      }
+
+      .about-images .image-2 {
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+        align-self: start;
+      }
+
+      .about-images .image-3 {
+        grid-column: 2 / 3;
+        grid-row: 1 / 3;
+        align-self: start;
+        margin-top: -2rem;
+      }
+
+@media (max-width: 550px) {
+    .about-section {
+        
+        padding: 4rem 2rem;
+        display: flex;
+        flex-direction: column;
+        
+      }
+  .about-content h1 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+      }
+
+      .about-content p {
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+}
+    
+   
+
+      .event-intro {
+        background: linear-gradient(
+            rgba(000, 000, 000, 0.5),
+            rgba(000, 000, 000, 0.5)
+          ),
+          url("events/Event Intro/Event Intro.webp");
+        /* background-image: url('events/Event Intro/Event Intro.webp'); */
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        /* min-height: 100vh; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6rem 2rem;
+      }
+
+      .event-intro-content {
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 2rem;
+        border-radius: 8px;
+        text-align: center;
+        max-width: 800px;
+      }
+      .event-intro h2 {
+        color: #cdb045;
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+      }
+
+@media (max-width: 550px) {
+    .event-intro {
+       
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+     
+        padding: 2rem 1rem;
+      }
+    .event-intro-content {
+        padding: 1rem;
+        max-width: 800px;
+      }
+    .event-intro h2 {
         color: #cdb045;
         font-size: 1.5rem;
         margin-bottom: 1rem;
-    }
+      }
+}
 
-    .service p {
+      #event-types {
+        background-color: #111;
+        padding: 4rem 2rem;
+      }
+
+      #event-types h2 {
+        color: #cdb045;
+        font-size: 2.2rem;
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+
+      .event-types-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+      }
+
+      .event-type {
+        background-color: #222;
+        /* padding: 1.5rem; */
+        border-radius: 8px;
+        text-align: center;
+        max-width: 350px;
+        margin: auto;
+      }
+
+      .event-type img {
+        width: 100%;
+        height: 300px;
+        /* object-fit: cover; */
+        border-radius: 8px;
+      }
+
+      .event-type h3 {
+        color: #cdb045;
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .event-type p {
+        font-size: 0.9rem;
+        color: #ddd;
+      }
+
+@media (max-width: 550px) {
+    #event-types h2 {
+        
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+       
+      }
+      .event-type h3 {
+        color: #cdb045;
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .event-type p {
         font-size: 1rem;
-        line-height: 1.6;
-        color: #fff;
-    }
-
-    @media (max-width: 768px) {
-        .services-grid {
-            grid-template-columns: 1fr;
-        }
-    }
+        color: #ddd;
+      }
+}
 
     
-    .cta-section {
-            background-image: url('events/backgrounds/cta.webp');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            padding: 6rem 2rem;
-            position: relative;
+
+
+      #team-building-types {
+        background-color: #000;
+        color: #fff;
+        padding: 4rem 2rem;
+      }
+
+      #team-building-types h2 {
+        color: #cdb045;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+
+      .team-building-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .team-building-type {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+        max-width: 350px;
+        margin: auto;
+      }
+
+      .team-building-type:hover {
+        transform: translateY(-5px);
+      }
+
+      .team-building-type img {
+        width: 100%;
+        height: 300px;
+        /* object-fit: cover; */
+      }
+
+      .team-building-type h3 {
+        color: #cdb045;
+        font-size: 1.2rem;
+        margin: 1rem;
+      }
+
+      .team-building-type p {
+        font-size: 0.9rem;
+        margin: 0 1rem 1rem;
+        line-height: 1.6;
+      }
+
+      .catering-intro {
+        display: flex;
+        align-items: center;
+        padding: 4rem 2rem;
+        background-color: #111;
+      }
+
+
+
+      .catering-content {
+        flex: 1;
+        padding-right: 2rem;
+      }
+
+      .catering-content h2 {
+        color: #cdb045;
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+      }
+
+      .catering-content p {
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      .catering-image {
+        flex: 1;
+      }
+
+      .catering-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+
+      @media (max-width: 768px) {
+        .catering-intro {
+          flex-direction: column-reverse;
+        }
+
+        .catering-content {
+          padding-right: 0;
+          padding-top: 2rem;
+        }
+      }
+
+      @media (max-width: 550px) {
+        .catering-content h2 {
+      text-align: center;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .catering-content p {
             text-align: center;
-        }
-
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.6);
-        }
-
-        .cta-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .cta-section h2 {
-            color: #fff;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(180deg, #fedf4e, #65421b);
-            color: #fff;
-            padding: 1rem 2rem;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            /* transition: background-color 0.3s ease; */
-        }
-
-        .cta-button:hover {
-            background-color: #e6c200;
-        }
-
-        @media (max-width: 768px) {
-            .cta-section h2 {
-                font-size: 2rem;
-            }
-        }
-        .gallery-section {
-    background-color: #000;
-    padding: 4rem 4rem;
+        font-size: 1rem;
+        line-height: 1.6;
+      }
 }
 
-.gallery-section h2 {
-    color: #cdb045;
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-    text-align: center;
-}
+      #catering-types {
+        background-color: #000;
+        color: #fff;
+        padding: 4rem 2rem;
+      }
 
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    max-width: 1600px;
-    margin: 0 auto;
-}
+      #catering-types h2 {
+        color: #cdb045;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+      }
 
-.gallery-item img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
-}
+      .catering-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
 
-.gallery-item img:hover {
-    transform: scale(1.05);
-}
+      .catering-type {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+        max-width: 350px;
+        margin: auto;
+      }
 
-@media (max-width: 768px) {
-    .gallery-grid {
-        grid-template-columns: 1fr;
+      .catering-type:hover {
+        transform: translateY(-5px);
+      }
+
+      .catering-type img {
+        width: 100%;
+        height: 300px;
+        /* object-fit: cover; */
+      }
+
+      .catering-type h3 {
+        color: #cdb045;
+        font-size: 1.2rem;
+        margin: 1rem;
+      }
+
+      .catering-type p {
+        font-size: 0.9rem;
+        margin: 0 1rem 1rem;
+        line-height: 1.6;
+      }
+
+      @media (max-width: 768px) {
+        .catering-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 550px) {
+        #catering-types h2 {
+       
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        
+      }
+      .catering-type h3 {
+        color: #cdb045;
+        font-size: 1.2rem;
+        margin: 1rem;
+      }
+
+      .catering-type p {
+        font-size: 1rem;
+        margin: 0 1rem 1rem;
+        line-height: 1.6;
+      }
     }
-}
-
-
-    .contact-section {
-        background-image: url('events/backgrounds/form.webp');
+      .why-us {
+        background-image: url("events/backgrounds/why us.webp");
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
         padding: 6rem 2rem;
         position: relative;
-    }
+      }
 
-    .contact-section::before {
-        content: '';
+      .why-us::before {
+        content: "";
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
         background-color: rgba(0, 0, 0, 0.7);
-    }
+      }
 
-    .contact-content {
+      .why-us-content {
         position: relative;
         z-index: 1;
         max-width: 1200px;
         margin: 0 auto;
-    }
+      }
 
-    .contact-section h2 {
+      .why-us h2 {
+        color: #cdb045;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        text-align: center;
+      }
+
+      .reasons-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 3rem;
+      }
+
+      .reason {
+        text-align: center;
+        transition: transform 0.3s ease;
+      }
+
+      .reason:hover {
+        transform: translateY(-5px);
+      }
+
+      .reason i {
+        font-size: 3rem;
+        color: #cdb045;
+        margin-bottom: 1rem;
+      }
+
+      .reason h3 {
+        color: #cdb045;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .reason p {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #fff;
+      }
+
+      @media (max-width: 768px) {
+        .reasons-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 550px) {
+        
+      .why-us h2 {
+        
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+        
+      }
+      .reason h3 {
+        color: #cdb045;
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+      }
+      }
+      #event-services {
+        background-color: #111;
+        padding: 4rem 2rem;
+      }
+
+      #event-services h2 {
+        color: #cdb045;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        text-align: center;
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+      }
+
+      .service {
+        background-color: #222;
+        border-radius: 8px;
+        padding: 2rem;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .service:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 20px rgba(255, 215, 0, 0.2);
+      }
+
+      .service i {
+        font-size: 3rem;
+        color: #cdb045;
+        margin-bottom: 1rem;
+        transition: transform 0.3s ease;
+      }
+
+      .service:hover i {
+        transform: scale(1.2);
+      }
+
+      .service h3 {
+        color: #cdb045;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .service p {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #fff;
+      }
+
+      @media (max-width: 768px) {
+        .services-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 550px) {
+        #event-services {
+        background-color: #111;
+        padding: 2rem 1rem;
+      }
+
+      #event-services h2 {
+        
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+        
+      }
+      .service h3 {
+        color: #cdb045;
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+      }
+
+    }
+      .cta-section {
+        background-image: url("events/backgrounds/cta.webp");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        padding: 6rem 2rem;
+        position: relative;
+        text-align: center;
+      }
+
+      .cta-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+      }
+
+      .cta-content {
+        position: relative;
+        z-index: 1;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .cta-section h2 {
+        color: #fff;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .cta-button {
+        display: inline-block;
+        background: linear-gradient(180deg, #fedf4e, #65421b);
+        color: #fff;
+        padding: 1rem 2rem;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        /* transition: background-color 0.3s ease; */
+      }
+      
+      .cta-button:hover {
+        background-color: #e6c200;
+      }
+
+      @media (max-width: 768px) {
+        .cta-section h2 {
+          font-size: 2rem;
+        }
+      }
+      @media (max-width: 550px) {
+        .cta-section {
+        background-image: url("events/backgrounds/cta.webp");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        padding: 4rem 1rem;
+        position: relative;
+        text-align: center;
+      }
+        .cta-section h2 {
+        color: #fff;
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+      }
+    }
+      .gallery-section {
+        background-color: #000;
+        padding: 4rem 4rem;
+      }
+
+      .gallery-section h2 {
         color: #cdb045;
         font-size: 2.5rem;
         margin-bottom: 2rem;
         text-align: center;
-    }
+      }
 
-    #contact-form {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-        max-width: 600px;
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        max-width: 1600px;
         margin: 0 auto;
-    }
+      }
 
-    #contact-form input,
-    #contact-form select,
-    #contact-form textarea {
+      .gallery-item img {
         width: 100%;
-        padding: 0.75rem 0;
-        border: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-        background-color: transparent;
-        color: #fff;
-        font-size: 1rem;
-        transition: border-color 0.3s ease;
-    }
+        height: auto;
+        object-fit: cover;
+        border-radius: 8px;
+        transition: transform 0.3s ease;
+      }
 
-    #contact-form input:focus,
-    #contact-form select:focus,
-    #contact-form textarea:focus {
-        outline: none;
-        border-bottom-color: #cdb045;
-    }
-
-    #contact-form input::placeholder,
-    #contact-form select::placeholder,
-    #contact-form textarea::placeholder {
-        color: rgba(255, 255, 255, 0.7);
-    }
-
-    #contact-form select {
-        appearance: none;
-        background-image: url('data:image/svg+xml;utf8,<svg fill="%23ffffff" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
-        background-repeat: no-repeat;
-        background-position: right 0.7em top 50%;
-        background-size: 1.2em auto;
-        
-    }
-
-    #contact-form textarea {
-        height: 100px;
-        resize: vertical;
-    }
-
-    option{
-        background-color: #000;
-    }
-
-    .submit-btn {
-        background: linear-gradient(180deg, #fedf4e, #65421b);
-        color: #fff;
-        padding: 1rem 2rem;
-        border: none;
-        border-radius: 5px;
-        font-size: 1.2rem;
-        font-weight: bold;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-    .submit-btn:hover {
-        background: linear-gradient(180deg, #65421b, #fedf4e);
-    }
-
-    @media (max-width: 768px) {
-        .contact-section {
-            padding: 4rem 1rem;
-        }
-    }
-
-
-    
-    .gallery-buttons {
+      .gallery-item img:hover {
+        transform: scale(1.05);
+      }
+      
+      .gallery-buttons {
         text-align: center;
         margin-top: 2rem;
-    }
-    .gallery-btn {
+      }
+      .gallery-btn {
         background: linear-gradient(180deg, #fedf4e, #65421b);
         color: #fff;
         padding: 0.75rem 1.5rem;
@@ -829,414 +781,832 @@
         cursor: pointer;
         transition: background-color 0.3s ease;
         margin: 0 0.5rem;
-    }
+      }
 
-    .gallery-btn:hover {
+      .gallery-btn:hover {
         background: linear-gradient(180deg, #65421b, #fedf4e);
-    }
+      }
 
-    .hidden {
+      .hidden {
         display: none;
-    }
-</style>
-
-
+      }
+      @media (max-width: 768px) {
+        
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
+        .gallery-section {
+        background-color: #000;
+        padding: 2rem 2rem;
+      }
+        .gallery-section h2 {
+       
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        
+      }
+        .gallery-grid {
+        gap: 1rem;
+
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .contact-section {
+        background-image: url("events/backgrounds/form.webp");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        padding: 6rem 2rem;
+        position: relative;
+      }
+
+      .contact-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+      }
+
+      .contact-content {
+        position: relative;
+        z-index: 1;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .contact-section h2 {
+        color: #cdb045;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+
+      #contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      #contact-form input,
+      #contact-form select,
+      #contact-form textarea {
+        width: 100%;
+        padding: 0.75rem 0;
+        border: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        background-color: transparent;
+        color: #fff;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+      }
+
+      #contact-form input:focus,
+      #contact-form select:focus,
+      #contact-form textarea:focus {
+        outline: none;
+        border-bottom-color: #cdb045;
+      }
+
+      #contact-form input::placeholder,
+      #contact-form select::placeholder,
+      #contact-form textarea::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      #contact-form select {
+        appearance: none;
+        background-image: url('data:image/svg+xml;utf8,<svg fill="%23ffffff" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+        background-repeat: no-repeat;
+        background-position: right 0.7em top 50%;
+        background-size: 1.2em auto;
+      }
+
+      #contact-form textarea {
+        height: 100px;
+        resize: vertical;
+      }
+
+      option {
+        background-color: #000;
+      }
+
+      .submit-btn {
+        background: linear-gradient(180deg, #fedf4e, #65421b);
+        color: #fff;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .submit-btn:hover {
+        background: linear-gradient(180deg, #65421b, #fedf4e);
+      }
+
+      @media (max-width: 768px) {
+        
+        .contact-section {
+          padding: 4rem 1rem;
+        }
+        .contact-section h2 {
+        color: #cdb045;
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+      }
+
+    </style>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="#hero">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#events">Events</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+      <nav>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
     </header>
 
-
-        <section id="hero" class="hero">
-            <video autoplay loop muted playsinline>
-                <source src="events/v.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <!-- <div class="hero-content">
+    <section id="hero" class="hero">
+      <video autoplay loop muted playsinline>
+        <source src="events/v.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <!-- <div class="hero-content">
                 <h1>Welcome to EventMasters</h1>
                 <p>Creating Unforgettable Experiences</p>
                 <a href="#contact" class="cta-button">Get Started</a>
             </div> -->
-        </section>
+    </section>
 
-        <section id="about" class="about-section">
-            <div class="about-content">
-                <h1>Your Trusted Event Management Company in Dubai</h1>
-                <p>MRM Advertising has earned a reputation for delivering complete event services, from initial planning to seamless execution. As a leading event management company in Dubai, we offer a broad range of services, including managing corporate events, private functions, and more. </p>
-                <p>Our expertise extends to team-building activities and professional catering services to ensure that every aspect of your event is covered. With our dedicated team, we handle everything with care, providing a smooth and memorable experience that meets the highest standards.</p>
-              
-               
-            </div>
-            <div class="about-images">
-                <img src="events/about+us+2.webp" alt="Event Planning" class="image-1">
-                <img src="events/about+us+3.webp" alt="Team Collaboration" class="image-2">
-                <img src="events/about+us+1.webp" alt="Memorable Events" class="image-3">
-            </div>
-        </section>
+    <section id="about" class="about-section">
+      <div class="about-content">
+        <h1>Your Trusted Event Management Company in Dubai</h1>
+        <p>
+          MRM Advertising has earned a reputation for delivering complete event
+          services, from initial planning to seamless execution. As a leading
+          event management company in Dubai, we offer a broad range of services,
+          including managing corporate events, private functions, and more.
+        </p>
+        <p>
+          Our expertise extends to team-building activities and professional
+          catering services to ensure that every aspect of your event is
+          covered. With our dedicated team, we handle everything with care,
+          providing a smooth and memorable experience that meets the highest
+          standards.
+        </p>
+      </div>
+      <div class="about-images">
+        <img
+          src="events/about+us+2.webp"
+          alt="Event Planning"
+          class="image-1"
+        />
+        <img
+          src="events/about+us+3.webp"
+          alt="Team Collaboration"
+          class="image-2"
+        />
+        <img
+          src="events/about+us+1.webp"
+          alt="Memorable Events"
+          class="image-3"
+        />
+      </div>
+    </section>
 
-        <section id="events" class="event-intro">
-            <div class="event-intro-content">
-                <h2>Event Management Company in Dubai Crafting  Events with Expertise and Creativity</h2>
-                <p>With minds full of creativity and a passion for excellence, our team consistently exceeds expectations. Each event is a new story waiting to unfold, where every detail is thoughtfully planned and perfectly executed. Driven by innovation and a desire to deliver memorable experiences, we ensure that every occasion leaves a lasting impression far beyond what was imagined.</p>
-            </div>
-        </section>  
+    <section id="events" class="event-intro">
+      <div class="event-intro-content">
+        <h2>
+          Event Management Company in Dubai Crafting Events with Expertise and
+          Creativity
+        </h2>
+        <p>
+          With minds full of creativity and a passion for excellence, our team
+          consistently exceeds expectations. Each event is a new story waiting
+          to unfold, where every detail is thoughtfully planned and perfectly
+          executed. Driven by innovation and a desire to deliver memorable
+          experiences, we ensure that every occasion leaves a lasting impression
+          far beyond what was imagined.
+        </p>
+      </div>
+    </section>
 
-        <section id="event-types">
-            <h2>Event Management Company in Dubai for Diverse Events</h2>
-            <div class="event-types-grid">
-                <div class="event-type">
-                    <img src="events/Event  Types/1/Birthday Events.webp" alt="Outdoor Adventure">
+    <section id="event-types">
+      <h2>Event Management Company in Dubai for Diverse Events</h2>
+      <div class="event-types-grid">
+        <div class="event-type">
+          <img
+            src="events/Event  Types/1/Birthday Events.webp"
+            alt="Outdoor Adventure"
+          />
 
-                    <h3>Birthday Events</h3>
-                    <p>Every birthday deserves to be special, and we create personal celebrations that combine creativity with careful planning, ensuring memorable moments.</p>
-                </div>
-                <div class="event-type">
-                    <img src="events/Event  Types/1/Brand Activation.webp" alt="Outdoor Adventure">
-                    <h3>Brand Activation</h3>
-                    <p>Through innovation and expertise, we craft brand activations that go beyond the ordinary, creating moments that resonate with your audience.</p>
-                </div>
-                <div class="event-type">
-                    <img src="events/Event  Types/1/Conferences.webp" alt="Outdoor Adventure">
-                    <h3>Conferences</h3>
-                    <p>Every detail matters when organizing a conference, and we excel at managing everything from logistics to creating an engaging environment</p>
-                </div>
+          <h3>Birthday Events</h3>
+          <p>
+            Every birthday deserves to be special, and we create personal
+            celebrations that combine creativity with careful planning, ensuring
+            memorable moments.
+          </p>
+        </div>
+        <div class="event-type">
+          <img
+            src="events/Event  Types/1/Brand Activation.webp"
+            alt="Outdoor Adventure"
+          />
+          <h3>Brand Activation</h3>
+          <p>
+            Through innovation and expertise, we craft brand activations that go
+            beyond the ordinary, creating moments that resonate with your
+            audience.
+          </p>
+        </div>
+        <div class="event-type">
+          <img
+            src="events/Event  Types/1/Conferences.webp"
+            alt="Outdoor Adventure"
+          />
+          <h3>Conferences</h3>
+          <p>
+            Every detail matters when organizing a conference, and we excel at
+            managing everything from logistics to creating an engaging
+            environment
+          </p>
+        </div>
 
-                <div class="event-type">
-                    <img src="events/Event  Types/2/Graduation Ceremonies.webp" alt="Outdoor Adventure">
-                    <h3>Graduation Ceremonies</h3>
-                    <p>Marking this special milestone, we handle every element of graduation ceremonies with care and attention, making the day truly memorable.</p>
-                </div>
-                <div class="event-type">
-                    <img src="events/Event  Types/2/Private Events.webp" alt="Outdoor Adventure">
-                    <h3>Private Events</h3>
-                    <p>We understand the importance of personal celebrations, offering tailored event management that ensures your private occasion runs seamlessly and stylishly.</p>
-                </div>
-                <div class="event-type">
-                    <img src="events/Event  Types/2/Product Launches.webp" alt="Outdoor Adventure">
-                    <h3>Product Launches</h3>
-                    <p>Launching a product is crucial for any business, and we bring expertise, precision, and creativity to ensure your product stands out.</p>
-                </div>
+        <div class="event-type">
+          <img
+            src="events/Event  Types/2/Graduation Ceremonies.webp"
+            alt="Outdoor Adventure"
+          />
+          <h3>Graduation Ceremonies</h3>
+          <p>
+            Marking this special milestone, we handle every element of
+            graduation ceremonies with care and attention, making the day truly
+            memorable.
+          </p>
+        </div>
+        <div class="event-type">
+          <img
+            src="events/Event  Types/2/Private Events.webp"
+            alt="Outdoor Adventure"
+          />
+          <h3>Private Events</h3>
+          <p>
+            We understand the importance of personal celebrations, offering
+            tailored event management that ensures your private occasion runs
+            seamlessly and stylishly.
+          </p>
+        </div>
+        <div class="event-type">
+          <img
+            src="events/Event  Types/2/Product Launches.webp"
+            alt="Outdoor Adventure"
+          />
+          <h3>Product Launches</h3>
+          <p>
+            Launching a product is crucial for any business, and we bring
+            expertise, precision, and creativity to ensure your product stands
+            out.
+          </p>
+        </div>
 
+        <div class="event-type">
+          <img
+            src="events/Event  Types/3/Corporate Events.webp"
+            alt="Outdoor Adventure"
+          />
+          <h3>Corporate Events</h3>
+          <p>
+            Our team deeply understands corporate dynamics and blends
+            professionalism with creativity to deliver seamless, impactful,
+            high-quality events.
+          </p>
+        </div>
+        <div class="event-type">
+          <img
+            src="events/Event  Types/3/Fashion Shows.webp"
+            alt="Outdoor Adventure"
+          />
 
-                <div class="event-type">
-                    <img src="events/Event  Types/3/Corporate Events.webp" alt="Outdoor Adventure">
-                    <h3>Corporate Events</h3>
-                    <p>Our team deeply understands corporate dynamics and blends professionalism with creativity to deliver seamless, impactful, high-quality events.</p>
-                </div>
-                <div class="event-type">
-                    <img src="events/Event  Types/3/Fashion Shows.webp" alt="Outdoor Adventure">
+          <h3>Fashion Shows</h3>
+          <p>
+            Bringing fashion to life on the runway, we ensure every show runs
+            smoothly, with creative concepts and flawless execution throughout.
+          </p>
+        </div>
+        <div class="event-type">
+          <img
+            src="events/Event  Types/3/Gala Dinners.webp"
+            alt="Outdoor Adventure"
+          />
 
-                    <h3>Fashion Shows</h3>
-                    <p>Bringing fashion to life on the runway, we ensure every show runs smoothly, with creative concepts and flawless execution throughout.</p>
-                </div>
-                <div class="event-type">
-                    <img src="events/Event  Types/3/Gala Dinners.webp" alt="Outdoor Adventure">
+          <h3>Gala Dinners</h3>
+          <p>
+            Crafting an evening of sophistication, we handle every detail with
+            expertise, ensuring your gala dinner reflects luxury and flawless
+            planning.
+          </p>
+        </div>
 
-                    <h3>Gala Dinners</h3>
-                    <p>Crafting an evening of sophistication, we handle every detail with expertise, ensuring your gala dinner reflects luxury and flawless planning.</p>
-                </div>
-             
-                <div class="event-type">
-                    <img src="events/Event  Types/4/Awarding Ceremonies.webp" alt="Outdoor Adventure">
+        <div class="event-type">
+          <img
+            src="events/Event  Types/4/Awarding Ceremonies.webp"
+            alt="Outdoor Adventure"
+          />
 
-                    <h3>Awarding Ceremonies</h3>
-                    <p>Celebrating achievements with elegance, our award ceremonies honor recipients in a way that’s thoughtful, refined, and leaves a lasting impression.</p>
-                </div>
-                
-                <div class="event-type">
-                    <img src="events/Event  Types/4/Opening Ceremonies.webp" alt="Outdoor Adventure">
+          <h3>Awarding Ceremonies</h3>
+          <p>
+            Celebrating achievements with elegance, our award ceremonies honor
+            recipients in a way that’s thoughtful, refined, and leaves a lasting
+            impression.
+          </p>
+        </div>
 
-                    <h3>Opening Ceremonies</h3>
-                    <p>We bring creativity and precision to every opening ceremony, making sure the first impression sets the stage for success.</p>
-                </div>
-               
-              
-                <div class="event-type">
-                    <img src="events/Event  Types/4/Social Events.webp" alt="Outdoor Adventure">
+        <div class="event-type">
+          <img
+            src="events/Event  Types/4/Opening Ceremonies.webp"
+            alt="Outdoor Adventure"
+          />
 
-                    <h3>Social Events</h3>
-                    <p>Our social events are designed to bring people together in a relaxed yet well-organized setting, offering guests unforgettable experiences.</p>
-                </div>
+          <h3>Opening Ceremonies</h3>
+          <p>
+            We bring creativity and precision to every opening ceremony, making
+            sure the first impression sets the stage for success.
+          </p>
+        </div>
 
-                
-            
-            </div>
-        </section>  
+        <div class="event-type">
+          <img
+            src="events/Event  Types/4/Social Events.webp"
+            alt="Outdoor Adventure"
+          />
 
+          <h3>Social Events</h3>
+          <p>
+            Our social events are designed to bring people together in a relaxed
+            yet well-organized setting, offering guests unforgettable
+            experiences.
+          </p>
+        </div>
+      </div>
+    </section>
 
-        <section id="catering-intro" class="catering-intro">
-            <div class="catering-content">
-                <h2>Team Building Activities to Support Team Bonding</h2>
-                <p>Our catering brings vibrant flavors and a rich culinary experience crafted by expert chefs using international and local ingredients. Each menu is designed to delight the palate, creating a satisfying and enjoyable dining experience. Whether it’s an outdoor event, corporate function, or private celebration, our catering adds a flavorful and lively touch to every occasion.Our team building services cater to various preferences, including outdoor adventures, indoor challenges, and CSR-focused activities. We provide creative experiences that foster collaboration, trust, and communication among teams. Each activity is meticulously planned to align with your objectives, guaranteeing a memorable event that enhances team connections and delivers a lasting, enjoyable impact for all participants.</p>
-            </div>
-            <div class="catering-image">
-                <img src="events/Team Building Intro/Team Building Intro.webp" alt="Gourmet Catering">
-            </div>
-        </section>
+    <section id="catering-intro" class="catering-intro">
+      <div class="catering-content">
+        <h2>Team Building Activities to Support Team Bonding</h2>
+        <p>
+          Our catering brings vibrant flavors and a rich culinary experience
+          crafted by expert chefs using international and local ingredients.
+          Each menu is designed to delight the palate, creating a satisfying and
+          enjoyable dining experience. Whether it’s an outdoor event, corporate
+          function, or private celebration, our catering adds a flavorful and
+          lively touch to every occasion.Our team building services cater to
+          various preferences, including outdoor adventures, indoor challenges,
+          and CSR-focused activities. We provide creative experiences that
+          foster collaboration, trust, and communication among teams. Each
+          activity is meticulously planned to align with your objectives,
+          guaranteeing a memorable event that enhances team connections and
+          delivers a lasting, enjoyable impact for all participants.
+        </p>
+      </div>
+      <div class="catering-image">
+        <img
+          src="events/Team Building Intro/Team Building Intro.webp"
+          alt="Gourmet Catering"
+        />
+      </div>
+    </section>
 
-        <section id="team-building-types">
-            <h2>Diverse Team Building Activities in the UAE</h2>
-            <div class="team-building-grid">
-                <div class="team-building-type">
-                    <img src="events/Team Buiding Typs/Outdoor Team Building Activities.webp" alt="Outdoor Adventure">
-                    <h3>Outdoor Team Building Activities</h3>
-                    <p>Designed for adventurous spirits, our outdoor team-building activities promote collaboration and trust through fun, exciting challenges in dynamic environments.</p>
-                </div>
-                <div class="team-building-type">
-                    <img src="events/Team Buiding Typs/Indoor Team Building Activities.webp" alt="Escape Rooms">
-                    <h3>Indoor Team Building Activities</h3>
-                    <p>Indoor team-building activities create engaging, focused experiences that enhance communication and teamwork in a comfortable and controlled setting.</p>
-                </div>
-                <div class="team-building-type">
-                    <img src="events/Team Buiding Typs/CSR Activities.webp" alt="Cooking Challenges">
-                    <h3>CSR Activities</h3>
-                    <p>Our CSR team-building activities combine teamwork with purpose, allowing teams to give back to the community while building stronger connections.</p>
-                </div>
+    <section id="team-building-types">
+      <h2>Diverse Team Building Activities in the UAE</h2>
+      <div class="team-building-grid">
+        <div class="team-building-type">
+          <img
+            src="events/Team Buiding Typs/Outdoor Team Building Activities.webp"
+            alt="Outdoor Adventure"
+          />
+          <h3>Outdoor Team Building Activities</h3>
+          <p>
+            Designed for adventurous spirits, our outdoor team-building
+            activities promote collaboration and trust through fun, exciting
+            challenges in dynamic environments.
+          </p>
+        </div>
+        <div class="team-building-type">
+          <img
+            src="events/Team Buiding Typs/Indoor Team Building Activities.webp"
+            alt="Escape Rooms"
+          />
+          <h3>Indoor Team Building Activities</h3>
+          <p>
+            Indoor team-building activities create engaging, focused experiences
+            that enhance communication and teamwork in a comfortable and
+            controlled setting.
+          </p>
+        </div>
+        <div class="team-building-type">
+          <img
+            src="events/Team Buiding Typs/CSR Activities.webp"
+            alt="Cooking Challenges"
+          />
+          <h3>CSR Activities</h3>
+          <p>
+            Our CSR team-building activities combine teamwork with purpose,
+            allowing teams to give back to the community while building stronger
+            connections.
+          </p>
+        </div>
+      </div>
+    </section>
 
-            </div>
-        </section>
+    <section id="catering-intro" class="catering-intro">
+      <div class="catering-content">
+        <h2>Premium Catering Services for All Your Event Needs</h2>
+        <p>
+          Our catering brings vibrant flavors and a rich culinary experience
+          crafted by expert chefs using international and local ingredients.
+          Each menu is designed to delight the palate, creating a satisfying and
+          enjoyable dining experience. Whether it’s an outdoor event, corporate
+          function, or private celebration, our catering adds a flavorful and
+          lively touch to every occasion.
+        </p>
+      </div>
+      <div class="catering-image">
+        <img
+          src="events/Catering Intro/Catering Intro.webp"
+          alt="Gourmet Catering"
+        />
+      </div>
+    </section>
 
-        <section id="catering-intro" class="catering-intro">
-            <div class="catering-content">
-                <h2>Premium Catering Services for All Your Event Needs</h2>
-                <p>Our catering brings vibrant flavors and a rich culinary experience crafted by expert chefs using international and local ingredients. Each menu is designed to delight the palate, creating a satisfying and enjoyable dining experience. Whether it’s an outdoor event, corporate function, or private celebration, our catering adds a flavorful and lively touch to every occasion.</p>
-            </div>
-            <div class="catering-image">
-                <img src="events/Catering Intro/Catering Intro.webp" alt="Gourmet Catering">
-            </div>
-        </section>
+    <section id="catering-types">
+      <h2>Our Catering Services Tailored for Every Event</h2>
+      <div class="catering-grid">
+        <div class="catering-type">
+          <img
+            src="events/Catering Types/Corporate Catering Services.webp"
+            alt="Gourmet Plated Dinners"
+          />
+          <h3>Corporate Catering Services</h3>
+          <p>
+            Ideal for corporate meetings, conferences, and seminars, providing
+            tailored menus and professional service to suit business events.
+          </p>
+        </div>
+        <div class="catering-type">
+          <img
+            src="events/Catering Types/Private Event Catering.webp"
+            alt="Buffet Stations"
+          />
+          <h3>Private Event Catering</h3>
+          <p>
+            Tailored for weddings, birthdays, and private gatherings, offering
+            personalized menus that enhance the elegance of every
+            celebration.ore and enjoy.
+          </p>
+        </div>
+        <div class="catering-type">
+          <img
+            src="events/Catering Types/Large-Scale Event Catering.webp"
+            alt="Cocktail Receptions"
+          />
+          <h3>Large-Scale Event Catering</h3>
+          <p>
+            Perfect for festivals, concerts, and public events, delivering
+            high-quality catering for large crowds with efficiency and care.
+          </p>
+        </div>
+        <div class="catering-type">
+          <img
+            src="events/Catering Types/Formal Event Catering.webp"
+            alt="Food Trucks"
+          />
+          <h3>Formal Event Catering</h3>
+          <p>
+            Designed for gala dinners, award nights, and VIP events, offering
+            refined dishes and exceptional service for formal occasions.
+          </p>
+        </div>
+        <div class="catering-type">
+          <img
+            src="events/Catering Types/Outdoor Catering.webp"
+            alt="Themed Cuisine"
+          />
+          <h3>Outdoor Catering</h3>
+          <p>
+            Ideal for open-air gatherings like garden parties and beach events,
+            providing fresh, flavorful menus suited to outdoor settings.
+          </p>
+        </div>
+        <div class="catering-type">
+          <img
+            src="events/Catering Types/Specialized Cuisine Catering.webp"
+            alt="Dessert Bars"
+          />
+          <h3>Specialized Cuisine Catering</h3>
+          <p>
+            Focused on delivering menus tailored to specific event themes and
+            preferences, ensuring the food perfectly complements your event.
+          </p>
+        </div>
+      </div>
+    </section>
 
-        <section id="catering-types">
-            <h2>Our Catering Services Tailored for Every Event</h2>
-            <div class="catering-grid">
-                <div class="catering-type">
-                    <img src="events/Catering Types/Corporate Catering Services.webp" alt="Gourmet Plated Dinners">
-                    <h3>Corporate Catering Services</h3>
-                    <p>Ideal for corporate meetings, conferences, and seminars, providing tailored menus and professional service to suit business events.</p>
-                </div>
-                <div class="catering-type">
-                    <img src="events/Catering Types/Private Event Catering.webp" alt="Buffet Stations">
-                    <h3>Private Event Catering</h3>
-                    <p>Tailored for weddings, birthdays, and private gatherings, offering personalized menus that enhance the elegance of every celebration.ore and enjoy.</p>
-                </div>
-                <div class="catering-type">
-                    <img src="events/Catering Types/Large-Scale Event Catering.webp" alt="Cocktail Receptions">
-                    <h3>Large-Scale Event Catering</h3>
-                    <p>Perfect for festivals, concerts, and public events, delivering high-quality catering for large crowds with efficiency and care.</p>
-                </div>
-                <div class="catering-type">
-                    <img src="events/Catering Types/Formal Event Catering.webp" alt="Food Trucks">
-                    <h3>Formal Event Catering</h3>
-                    <p>Designed for gala dinners, award nights, and VIP events, offering refined dishes and exceptional service for formal occasions.</p>
-                </div>
-                <div class="catering-type">
-                    <img src="events/Catering Types/Outdoor Catering.webp" alt="Themed Cuisine">
-                    <h3>Outdoor Catering</h3>
-                    <p>Ideal for open-air gatherings like garden parties and beach events, providing fresh, flavorful menus suited to outdoor settings.</p>
-                </div>
-                <div class="catering-type">
-                    <img src="events/Catering Types/Specialized Cuisine Catering.webp" alt="Dessert Bars">
-                    <h3>Specialized Cuisine Catering</h3>
-                    <p>
-                        Focused on delivering menus tailored to specific event themes and preferences, ensuring the food perfectly complements your event.</p>
-                </div>
-            </div>
-        </section>
+    <section id="why-us" class="why-us">
+      <div class="why-us-content">
+        <h2>Why We Are One of the Best Event Management Companies in Dubai</h2>
+        <div class="reasons-grid">
+          <div class="reason">
+            <img src="events/Why Us/Extensive  Experience.png" alt="" />
+            <h3>Extensive Industry Experience</h3>
+            <p>
+              Over ten years of experience handling complex events and
+              delivering exceptional results every time.
+            </p>
+          </div>
+          <div class="reason">
+            <img src="events/Why Us/Innovative Creativity.png" alt="" />
+            <h3>Innovative Creativity</h3>
+            <p>
+              We craft unique themes with precision, ensuring each event stands
+              out and captivates guests.
+            </p>
+          </div>
+          <div class="reason">
+            <img src="events/Why Us/Commitment to Quality.png" alt="" />
+            <h3>Commitment to Quality</h3>
+            <p>
+              Focused on excellence, we ensure every event exceeds expectations,
+              delivering success and satisfaction.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <section id="why-us" class="why-us">
-            <div class="why-us-content">
-                <h2>Why We Are One of the Best Event Management Companies in Dubai</h2>
-                <div class="reasons-grid">
-                    <div class="reason">
-                        <img src="events/Why Us/Extensive  Experience.png" alt="">
-                        <h3>Extensive Industry Experience</h3>
-                        <p>Over ten years of experience handling complex events and delivering exceptional results every time.</p>
-                    </div>
-                    <div class="reason">
-                        <img src="events/Why Us/Innovative Creativity.png" alt="">
-                        <h3>Innovative Creativity</h3>
-                        <p>We craft unique themes with precision, ensuring each event stands out and captivates guests.</p>
-                    </div>
-                    <div class="reason">
-                        <img src="events/Why Us/Commitment to Quality.png" alt="">
-                        <h3>Commitment to Quality</h3>
-                        <p>Focused on excellence, we ensure every event exceeds expectations, delivering success and satisfaction.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <section id="event-services">
+      <h2>Event Services We Provide</h2>
+      <div class="services-grid">
+        <div class="service">
+          <img src="events/Events Sevices/Venue.png" alt="" />
+          <h3>Venue</h3>
+          <p>
+            We offer venue options tailored to your event’s size and participant
+            needs.
+          </p>
+        </div>
+        <div class="service">
+          <img src="events/Events Sevices/Technical Support.png" alt="" />
+          <h3>Technical Support</h3>
+          <p>
+            Handling essential facilities, including electricity, internet, and
+            registration logistics.
+          </p>
+        </div>
+        <div class="service">
+          <img src="events/Events Sevices/AV Equipment.png" alt="" />
+          <h3>AV Equipment</h3>
+          <p>
+            Complete setup of lights, sound, and LED displays for seamless event
+            operations.
+          </p>
+        </div>
+        <div class="service">
+          <img src="events/Events Sevices/Stages & Decorations.png" alt="" />
 
-        <section id="event-services">
-            <h2>Event Services We Provide</h2>
-            <div class="services-grid">
-                <div class="service">
-                    <img src="events/Events Sevices/Venue.png" alt="">
-                    <h3>Venue</h3>
-                    <p>We offer venue options tailored to your event’s size and participant needs.</p>
-                </div>
-                <div class="service">
-                    <img src="events/Events Sevices/Technical Support.png" alt="">
-                    <h3>Technical Support</h3>
-                    <p>Handling essential facilities, including electricity, internet, and registration logistics.</p>
-                </div>
-                <div class="service">
-                   <img src="events/Events Sevices/AV Equipment.png" alt="">
-                    <h3>AV Equipment</h3>
-                    <p>Complete setup of lights, sound, and LED displays for seamless event operations.</p>
-                </div>
-                <div class="service">
-                    <img src="events/Events Sevices/Stages & Decorations.png" alt="">
+          <h3>Stages & Decorations</h3>
+          <p>
+            Custom-designed stages and decorations crafted by our in-house team
+            for your event.
+          </p>
+        </div>
+        <div class="service">
+          <img
+            src="events/Events Sevices/Interactive Technologies.png"
+            alt=""
+          />
 
-                    <h3>Stages & Decorations</h3>
-                    <p>Custom-designed stages and decorations crafted by our in-house team for your event.</p>
-                </div>
-                <div class="service">
-                    <img src="events/Events Sevices/Interactive Technologies.png" alt="">
+          <h3>Interactive Technologies</h3>
+          <p>
+            Enhance attendee engagement with the latest interactive and digital
+            technologies.
+          </p>
+        </div>
+        <div class="service">
+          <img src="events/Events Sevices/Design & Branding.png" alt="" />
+          <h3>Design & Branding</h3>
+          <p>
+            We create unique event branding, from logo design to the overall
+            concept.rations and themes.
+          </p>
+        </div>
+        <div class="service">
+          <img src="events/Events Sevices/Awards & Gift Items.png" alt="" />
+          <h3>Awards and Gift Items</h3>
+          <p>
+            Custom-designed awards and gift items to add a personal touch to
+            your event.
+          </p>
+        </div>
+        <div class="service">
+          <img src="events/Events Sevices/Animation Content.png" alt="" />
+          <h3>Animation Content & Mapping</h3>
+          <p>
+            We produce 2D and 3D animation content to elevate your event’s
+            visual experience.
+          </p>
+        </div>
+        <div class="service">
+          <img src="events/Events Sevices/Photo & Videography.png" alt="" />
+          <h3>Photo & Videography</h3>
+          <p>
+            Capture every moment with professional photography and videography
+            services for social media and more.
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- Other sections would go here -->
+    <section id="call-to-action" class="cta-section">
+      <div class="cta-content">
+        <h2>
+          Leave It to Us! <br />
+          Whatever Your Event Requires, We’ll Manage It with Care, Quality, and
+          Expertise
+        </h2>
+        <a href="#contact" class="cta-button">Contact Us</a>
+      </div>
+    </section>
+    <section id="gallery" class="gallery-section">
+      <h2>Event Gallery</h2>
+      <div class="gallery-grid" id="gallery-grid">
+        <!-- First 12 images (6 rows) -->
+        <div class="gallery-item">
+          <img src="events/Gallery/1.webp" alt="Event Image 1" />
+        </div>
+        <div class="gallery-item">
+          <img src="events/Gallery/2.webp" alt="Event Image 2" />
+        </div>
+        <div class="gallery-item">
+          <img src="events/Gallery/3.webp" alt="Event Image 3" />
+        </div>
+        <div class="gallery-item">
+          <img src="events/Gallery/4.webp" alt="Event Image 4" />
+        </div>
+        <div class="gallery-item">
+          <img src="events/Gallery/5.webp" alt="Event Image 5" />
+        </div>
+        <div class="gallery-item">
+          <img src="events/Gallery/6.webp" alt="Event Image 6" />
+        </div>
+        <div class="gallery-item">
+          <img src="events/Gallery/7.webp" alt="Event Image 7" />
+        </div>
+        <div class="gallery-item">
+          <img src="events/Gallery/8.webp" alt="Event Image 8" />
+        </div>
+        <div class="gallery-item">
+          <img src="events/Gallery/9.webp" alt="Event Image 9" />
+        </div>
+        <div class="gallery-item">
+          <img src="events/Gallery/10.webp" alt="Event Image 10" />
+        </div>
+        <div class="gallery-item">
+          <img src="events/Gallery/11.webp" alt="Event Image 11" />
+        </div>
+        <div class="gallery-item">
+          <img src="events/Gallery/12.webp" alt="Event Image 12" />
+        </div>
+      </div>
+      <div class="gallery-buttons">
+        <button id="show-more-btn" class="gallery-btn">Show More</button>
+        <button id="show-less-btn" class="gallery-btn hidden">Show Less</button>
+      </div>
+    </section>
 
-                    <h3>Interactive Technologies</h3>
-                    <p>Enhance attendee engagement with the latest interactive and digital technologies.</p>
-                </div>
-                <div class="service">
-                    <img src="events/Events Sevices/Design & Branding.png" alt="">
-                    <h3>Design & Branding</h3>
-                    <p>We create unique event branding, from logo design to the overall concept.rations and themes.</p>
-                </div>
-                <div class="service">
-                    <img src="events/Events Sevices/Awards & Gift Items.png" alt="">
-                    <h3>Awards and Gift Items</h3>
-                    <p>Custom-designed awards and gift items to add a personal touch to your event.</p>
-                </div>
-                <div class="service">
-                    <img src="events/Events Sevices/Animation Content.png" alt="">
-                    <h3>Animation Content & Mapping</h3>
-                    <p>We produce 2D and 3D animation content to elevate your event’s visual experience.</p>
-                </div>
-                <div class="service">
-                   <img src="events/Events Sevices/Photo & Videography.png" alt="">
-                    <h3>Photo & Videography</h3>
-                    <p>Capture every moment with professional photography and videography services for social media and more.</p>
-                </div>
-            </div>
-        </section>
-        <!-- Other sections would go here -->
-        <section id="call-to-action" class="cta-section">
-            <div class="cta-content">
-                <h2>Leave It to Us!
-                    <br> Whatever Your Event Requires, We’ll Manage It with Care, Quality, and Expertise</h2>
-                <a href="#contact" class="cta-button">Contact Us</a>
-            </div>
-        </section>
-        <section id="gallery" class="gallery-section">
-            <h2>Event Gallery</h2>
-            <div class="gallery-grid" id="gallery-grid">
-                <!-- First 12 images (6 rows) -->
-                <div class="gallery-item"><img src="events/Gallery/1.webp" alt="Event Image 1"></div>
-                <div class="gallery-item"><img src="events/Gallery/2.webp" alt="Event Image 2"></div>
-                <div class="gallery-item"><img src="events/Gallery/3.webp" alt="Event Image 3"></div>
-                <div class="gallery-item"><img src="events/Gallery/4.webp" alt="Event Image 4"></div>
-                <div class="gallery-item"><img src="events/Gallery/5.webp" alt="Event Image 5"></div>
-                <div class="gallery-item"><img src="events/Gallery/6.webp" alt="Event Image 6"></div>
-                <div class="gallery-item"><img src="events/Gallery/7.webp" alt="Event Image 7"></div>
-                <div class="gallery-item"><img src="events/Gallery/8.webp" alt="Event Image 8"></div>
-                <div class="gallery-item"><img src="events/Gallery/9.webp" alt="Event Image 9"></div>
-                <div class="gallery-item"><img src="events/Gallery/10.webp" alt="Event Image 10"></div>
-                <div class="gallery-item"><img src="events/Gallery/11.webp" alt="Event Image 11"></div>
-                <div class="gallery-item"><img src="events/Gallery/12.webp" alt="Event Image 12"></div>
-            </div>
-            <div class="gallery-buttons">
-                <button id="show-more-btn" class="gallery-btn">Show More</button>
-                <button id="show-less-btn" class="gallery-btn hidden">Show Less</button>
-            </div>
-        </section>
-
-        <section id="contact" class="contact-section">
-            <div class="contact-content">
-                <h2>We’re Here to Make Your Upcoming Event Special, Unique, and a Standout Experience</h2>
-                <form id="contact-form">
-                    <input type="text" id="full-name" name="full-name" placeholder="Full Name" required>
-                    <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
-                    <input type="email" id="email" name="email" placeholder="Email Address" required>
-                    <select id="event-type" name="event-type" required>
-                        <option value="" disabled selected>Event Type</option>
-                        <option value="corporate">Corporate Events</option>
-                        <option value="Conferences">Conferences</option>
-                        <option value="Brand Activation">Brand Activation</option>
-                        <option value="Product Launches">Product Launches</option>
-                        <option value="Graduation Ceremonies">Graduation Ceremonies</option>
-                        <option value="Opening Ceremonies">Opening Ceremonies</option>
-                        <option value="Awarding Ceremonies">Awarding Ceremonies</option>
-                        <option value="Gala Dinners">Gala Dinners</option>
-                        <option value="Social Events">Social Events</option>
-                        <option value="Fashion Shows">Fashion Shows</option>
-                        <option value="Private Events">Private Events</option>
-                        <option value="Birthday Events">Birthday Events</option>
-                        <option value="other">Other</option>
-                    </select>
-                    <textarea id="event-details" name="event-details" placeholder="Tell Us More About Your Event" required></textarea>
-                    <button type="submit" class="submit-btn">Submit</button>
-                </form>
-            </div>
-        </section>
+    <section id="contact" class="contact-section">
+      <div class="contact-content">
+        <h2>
+          We’re Here to Make Your Upcoming Event Special, Unique, and a Standout
+          Experience
+        </h2>
+        <form id="contact-form">
+          <input
+            type="text"
+            id="full-name"
+            name="full-name"
+            placeholder="Full Name"
+            required
+          />
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="Phone Number"
+            required
+          />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email Address"
+            required
+          />
+          <select id="event-type" name="event-type" required>
+            <option value="" disabled selected>Event Type</option>
+            <option value="corporate">Corporate Events</option>
+            <option value="Conferences">Conferences</option>
+            <option value="Brand Activation">Brand Activation</option>
+            <option value="Product Launches">Product Launches</option>
+            <option value="Graduation Ceremonies">Graduation Ceremonies</option>
+            <option value="Opening Ceremonies">Opening Ceremonies</option>
+            <option value="Awarding Ceremonies">Awarding Ceremonies</option>
+            <option value="Gala Dinners">Gala Dinners</option>
+            <option value="Social Events">Social Events</option>
+            <option value="Fashion Shows">Fashion Shows</option>
+            <option value="Private Events">Private Events</option>
+            <option value="Birthday Events">Birthday Events</option>
+            <option value="other">Other</option>
+          </select>
+          <textarea
+            id="event-details"
+            name="event-details"
+            placeholder="Tell Us More About Your Event"
+            required
+          ></textarea>
+          <button type="submit" class="submit-btn">Submit</button>
+        </form>
+      </div>
+    </section>
 
     <footer>
-        <p>&copy; 2023 EventMasters. All rights reserved.</p>
+      <p>&copy; 2023 EventMasters. All rights reserved.</p>
     </footer>
 
     <script>
-        // Simple smooth scrolling for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
+      // Simple smooth scrolling for navigation
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+          });
         });
+      });
 
-  // Gallery "Show More" and "Show Less" functionality
-  const galleryGrid = document.getElementById('gallery-grid');
-    const showMoreBtn = document.getElementById('show-more-btn');
-    const showLessBtn = document.getElementById('show-less-btn');
-    let currentImages = 12;
-    const totalImages = 24;
-    const imagesPerLoad = 12;
+      // Gallery "Show More" and "Show Less" functionality
+      const galleryGrid = document.getElementById("gallery-grid");
+      const showMoreBtn = document.getElementById("show-more-btn");
+      const showLessBtn = document.getElementById("show-less-btn");
+      let currentImages = 12;
+      const totalImages = 24;
+      const imagesPerLoad = 12;
 
-    showMoreBtn.addEventListener('click', function() {
-        for (let i = currentImages + 1; i <= Math.min(currentImages + imagesPerLoad, totalImages); i++) {
-            const newItem = document.createElement('div');
-            newItem.className = 'gallery-item';
-            newItem.innerHTML = `<img src="events/Gallery/${i}.webp" alt="Event Image ${i}">`;
-            galleryGrid.appendChild(newItem);
+      showMoreBtn.addEventListener("click", function () {
+        for (
+          let i = currentImages + 1;
+          i <= Math.min(currentImages + imagesPerLoad, totalImages);
+          i++
+        ) {
+          const newItem = document.createElement("div");
+          newItem.className = "gallery-item";
+          newItem.innerHTML = `<img src="events/Gallery/${i}.webp" alt="Event Image ${i}">`;
+          galleryGrid.appendChild(newItem);
         }
 
         currentImages += imagesPerLoad;
 
         if (currentImages >= totalImages) {
-            showMoreBtn.classList.add('hidden');
+          showMoreBtn.classList.add("hidden");
         }
-        showLessBtn.classList.remove('hidden');
-    });
+        showLessBtn.classList.remove("hidden");
+      });
 
-    showLessBtn.addEventListener('click', function() {
-        const galleryItems = galleryGrid.querySelectorAll('.gallery-item');
+      showLessBtn.addEventListener("click", function () {
+        const galleryItems = galleryGrid.querySelectorAll(".gallery-item");
         for (let i = galleryItems.length - 1; i >= 12; i--) {
-            galleryItems[i].remove();
+          galleryItems[i].remove();
         }
 
         currentImages = 12;
-        showMoreBtn.classList.remove('hidden');
-        showLessBtn.classList.add('hidden');
-    });
+        showMoreBtn.classList.remove("hidden");
+        showLessBtn.classList.add("hidden");
+      });
     </script>
-</body>
+  </body>
 </html>
