@@ -703,6 +703,110 @@
         grid-template-columns: 1fr;
     }
 }
+
+
+    .contact-section {
+        background-image: url('events/backgrounds/form.webp');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        padding: 6rem 2rem;
+        position: relative;
+    }
+
+    .contact-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .contact-content {
+        position: relative;
+        z-index: 1;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .contact-section h2 {
+        color: #cdb045;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    #contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    #contact-form input,
+    #contact-form select,
+    #contact-form textarea {
+        width: 100%;
+        padding: 0.75rem 0;
+        border: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        background-color: transparent;
+        color: #fff;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+    }
+
+    #contact-form input:focus,
+    #contact-form select:focus,
+    #contact-form textarea:focus {
+        outline: none;
+        border-bottom-color: #cdb045;
+    }
+
+    #contact-form input::placeholder,
+    #contact-form select::placeholder,
+    #contact-form textarea::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    #contact-form select {
+        appearance: none;
+        background-image: url('data:image/svg+xml;utf8,<svg fill="%23ffffff" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+        background-repeat: no-repeat;
+        background-position: right 0.7em top 50%;
+        background-size: 1.2em auto;
+    }
+
+    #contact-form textarea {
+        height: 100px;
+        resize: vertical;
+    }
+
+    .submit-btn {
+        background: linear-gradient(180deg, #fedf4e, #65421b);
+        color: #fff;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .submit-btn:hover {
+        background: linear-gradient(180deg, #65421b, #fedf4e);
+    }
+
+    @media (max-width: 768px) {
+        .contact-section {
+            padding: 4rem 1rem;
+        }
+    }
+
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -1032,6 +1136,26 @@
                 <div class="gallery-item">
                     <img src="https://via.placeholder.com/600x600.png?text=Event+Image+10" alt="Event Image 6">
                 </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="contact-content">
+                <h2>We’re Here to Make Your Upcoming Event Special, Unique, and a Standout Experience</h2>
+                <form id="contact-form">
+                    <input type="text" id="full-name" name="full-name" placeholder="Full Name" required>
+                    <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
+                    <input type="email" id="email" name="email" placeholder="Email Address" required>
+                    <select id="event-type" name="event-type" required>
+                        <option value="" disabled selected>Event Type</option>
+                        <option value="corporate">Corporate Event</option>
+                        <option value="wedding">Wedding</option>
+                        <option value="birthday">Birthday Party</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <textarea id="event-details" name="event-details" placeholder="Tell Us More About Your Event" required></textarea>
+                    <button type="submit" class="submit-btn">Submit</button>
+                </form>
             </div>
         </section>
 
