@@ -812,7 +812,36 @@
         }
     }
 
-    </style>
+
+    
+    .gallery-buttons {
+        text-align: center;
+        margin-top: 2rem;
+    }
+    .gallery-btn {
+        background: linear-gradient(180deg, #fedf4e, #65421b);
+        color: #fff;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin: 0 0.5rem;
+    }
+
+    .gallery-btn:hover {
+        background: linear-gradient(180deg, #65421b, #fedf4e);
+    }
+
+    .hidden {
+        display: none;
+    }
+</style>
+
+
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -1107,40 +1136,26 @@
                 <a href="#contact" class="cta-button">Contact Us</a>
             </div>
         </section>
-
         <section id="gallery" class="gallery-section">
             <h2>Event Gallery</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/600x600.png?text=Event+Image+1" alt="Event Image 1">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/600x600.png?text=Event+Image+2" alt="Event Image 2">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/600x600.png?text=Event+Image+3" alt="Event Image 3">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/600x600.png?text=Event+Image+4" alt="Event Image 4">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/600x600.png?text=Event+Image+5" alt="Event Image 5">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/600x600.png?text=Event+Image+6" alt="Event Image 6">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/600x600.png?text=Event+Image+7" alt="Event Image 6">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/600x600.png?text=Event+Image+8" alt="Event Image 6">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/600x600.png?text=Event+Image+9" alt="Event Image 6">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/600x600.png?text=Event+Image+10" alt="Event Image 6">
-                </div>
+            <div class="gallery-grid" id="gallery-grid">
+                <!-- First 12 images (6 rows) -->
+                <div class="gallery-item"><img src="events/Gallery/1.webp" alt="Event Image 1"></div>
+                <div class="gallery-item"><img src="events/Gallery/2.webp" alt="Event Image 2"></div>
+                <div class="gallery-item"><img src="events/Gallery/3.webp" alt="Event Image 3"></div>
+                <div class="gallery-item"><img src="events/Gallery/4.webp" alt="Event Image 4"></div>
+                <div class="gallery-item"><img src="events/Gallery/5.webp" alt="Event Image 5"></div>
+                <div class="gallery-item"><img src="events/Gallery/6.webp" alt="Event Image 6"></div>
+                <div class="gallery-item"><img src="events/Gallery/7.webp" alt="Event Image 7"></div>
+                <div class="gallery-item"><img src="events/Gallery/8.webp" alt="Event Image 8"></div>
+                <div class="gallery-item"><img src="events/Gallery/9.webp" alt="Event Image 9"></div>
+                <div class="gallery-item"><img src="events/Gallery/10.webp" alt="Event Image 10"></div>
+                <div class="gallery-item"><img src="events/Gallery/11.webp" alt="Event Image 11"></div>
+                <div class="gallery-item"><img src="events/Gallery/12.webp" alt="Event Image 12"></div>
+            </div>
+            <div class="gallery-buttons">
+                <button id="show-more-btn" class="gallery-btn">Show More</button>
+                <button id="show-less-btn" class="gallery-btn hidden">Show Less</button>
             </div>
         </section>
 
@@ -1187,6 +1202,41 @@
                 });
             });
         });
+
+  // Gallery "Show More" and "Show Less" functionality
+  const galleryGrid = document.getElementById('gallery-grid');
+    const showMoreBtn = document.getElementById('show-more-btn');
+    const showLessBtn = document.getElementById('show-less-btn');
+    let currentImages = 12;
+    const totalImages = 24;
+    const imagesPerLoad = 12;
+
+    showMoreBtn.addEventListener('click', function() {
+        for (let i = currentImages + 1; i <= Math.min(currentImages + imagesPerLoad, totalImages); i++) {
+            const newItem = document.createElement('div');
+            newItem.className = 'gallery-item';
+            newItem.innerHTML = `<img src="events/Gallery/${i}.webp" alt="Event Image ${i}">`;
+            galleryGrid.appendChild(newItem);
+        }
+
+        currentImages += imagesPerLoad;
+
+        if (currentImages >= totalImages) {
+            showMoreBtn.classList.add('hidden');
+        }
+        showLessBtn.classList.remove('hidden');
+    });
+
+    showLessBtn.addEventListener('click', function() {
+        const galleryItems = galleryGrid.querySelectorAll('.gallery-item');
+        for (let i = galleryItems.length - 1; i >= 12; i--) {
+            galleryItems[i].remove();
+        }
+
+        currentImages = 12;
+        showMoreBtn.classList.remove('hidden');
+        showLessBtn.classList.add('hidden');
+    });
     </script>
 </body>
 </html>
