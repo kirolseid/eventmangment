@@ -99,16 +99,47 @@
             flex: 1;
         }
         .event-intro {
-            background-image: url('events/Event Intro/Event Intro.webp');
+            background: linear-gradient(
+      rgba(000, 000, 000, 0.5),
+      rgba(000, 000, 000, 0.5)
+    ),
+    url("events/Event Intro/Event Intro.webp");
+            /* background-image: url('events/Event Intro/Event Intro.webp'); */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            min-height: 100vh;
+            /* min-height: 100vh; */
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 4rem 2rem;
+            padding: 6rem 2rem;
         }
+
+
+        /* .event-intro  {
+            background-image: url('events/Event Intro/Event Intro.webp');
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 6rem 2rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .event-intro::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            
+        } */
+
         .event-intro-content {
             background-color: rgba(0, 0, 0, 0.7);
             padding: 2rem;
@@ -424,8 +455,8 @@
 
         .catering-type img {
             width: 100%;
-            height: 200px;
-            object-fit: cover;
+            height: 300px;
+            /* object-fit: cover; */
         }
 
         .catering-type h3 {
@@ -447,7 +478,7 @@
         }
 
         .why-us {
-            background-image: url('https://via.placeholder.com/1920x1080.png?text=Why+Choose+Us');
+            background-image: url('events/backgrounds/why us.webp');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -580,7 +611,7 @@
 
     
     .cta-section {
-            background-image: url('https://via.placeholder.com/1920x1080.png?text=Call+To+Action');
+            background-image: url('events/backgrounds/cta.webp');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -849,32 +880,32 @@
             <h2>Our Catering Services Tailored for Every Event</h2>
             <div class="catering-grid">
                 <div class="catering-type">
-                    <img src="https://via.placeholder.com/300x200.png?text=Gourmet+Plated+Dinners" alt="Gourmet Plated Dinners">
+                    <img src="events/Catering Types/Corporate Catering Services.webp" alt="Gourmet Plated Dinners">
                     <h3>Corporate Catering Services</h3>
                     <p>Ideal for corporate meetings, conferences, and seminars, providing tailored menus and professional service to suit business events.</p>
                 </div>
                 <div class="catering-type">
-                    <img src="https://via.placeholder.com/300x200.png?text=Buffet+Stations" alt="Buffet Stations">
+                    <img src="events/Catering Types/Private Event Catering.webp" alt="Buffet Stations">
                     <h3>Private Event Catering</h3>
                     <p>Tailored for weddings, birthdays, and private gatherings, offering personalized menus that enhance the elegance of every celebration.ore and enjoy.</p>
                 </div>
                 <div class="catering-type">
-                    <img src="https://via.placeholder.com/300x200.png?text=Cocktail+Receptions" alt="Cocktail Receptions">
+                    <img src="events/Catering Types/Large-Scale Event Catering.webp" alt="Cocktail Receptions">
                     <h3>Large-Scale Event Catering</h3>
                     <p>Perfect for festivals, concerts, and public events, delivering high-quality catering for large crowds with efficiency and care.</p>
                 </div>
                 <div class="catering-type">
-                    <img src="https://via.placeholder.com/300x200.png?text=Food+Trucks" alt="Food Trucks">
+                    <img src="events/Catering Types/Formal Event Catering.webp" alt="Food Trucks">
                     <h3>Formal Event Catering</h3>
                     <p>Designed for gala dinners, award nights, and VIP events, offering refined dishes and exceptional service for formal occasions.</p>
                 </div>
                 <div class="catering-type">
-                    <img src="https://via.placeholder.com/300x200.png?text=Themed+Cuisine" alt="Themed Cuisine">
+                    <img src="events/Catering Types/Outdoor Catering.webp" alt="Themed Cuisine">
                     <h3>Outdoor Catering</h3>
                     <p>Ideal for open-air gatherings like garden parties and beach events, providing fresh, flavorful menus suited to outdoor settings.</p>
                 </div>
                 <div class="catering-type">
-                    <img src="https://via.placeholder.com/300x200.png?text=Dessert+Bars" alt="Dessert Bars">
+                    <img src="events/Catering Types/Specialized Cuisine Catering.webp" alt="Dessert Bars">
                     <h3>Specialized Cuisine Catering</h3>
                     <p>
                         Focused on delivering menus tailored to specific event themes and preferences, ensuring the food perfectly complements your event.</p>
@@ -960,7 +991,8 @@
         <!-- Other sections would go here -->
         <section id="call-to-action" class="cta-section">
             <div class="cta-content">
-                <h2>Leave It to Us! Whatever Your Event Requires, We’ll Manage It with Care, Quality, and Expertise</h2>
+                <h2>Leave It to Us!
+                    <br> Whatever Your Event Requires, We’ll Manage It with Care, Quality, and Expertise</h2>
                 <a href="#contact" class="cta-button">Contact Us</a>
             </div>
         </section>
